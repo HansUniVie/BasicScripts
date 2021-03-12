@@ -1,10 +1,10 @@
 clc; clear all;close all;
 % add path 
-addpath('C:\Users\Hans\Documents\GitHub\basicScripts\MatlabOpensimPipelineTools\');
-addpath('C:\Users\Hans\Documents\GitHub\basicScripts\processEMG');
-addpath('C:\Users\Hans\Documents\GitHub\basicScripts\plot_figure');
+addpath([ pwd '\MatlabOpensimPipelineTools\']);
+addpath([pwd '\processEMG']);
+addpath([pwd '\plot_figure']);
 
- subject_folder = 'C:\Users\Hans\Documents\WORK_KULeuven\MATLABcodes\loadOpenSimFiles\exampleData\';
+ subject_folder = [pwd '\exampleData\'];
  
  %% load files
  OS_results.IK = load_sto_file([subject_folder 'gait3_kinematics.mot']);  % joint kinematics
