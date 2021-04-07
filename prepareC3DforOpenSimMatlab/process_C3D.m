@@ -98,7 +98,60 @@ end
 save(fullfile(output_folder, 'settings.mat'), 'cycle', 'firstFrame', 'frequency', 'duration', '-mat');
 copyfile(c3dpath, fullfile(output_folder, 'c3dfile.c3d'));
 
-b_generateGRF = questdlg('Create GRF.XML ?','Ground Reaction Forces', 'Yes', 'No', 'Yes');
-if strcmp(b_generateGRF, 'Yes')
-    a_generateGRF_XML;
+
+%% generate GRF.xml
+
+grforces = xml_read('GRF_file_all.xml');
+grforces_generated = xml_read('GRF_file_empty.xml');
+
+ForceList = {'1', '2', '3'};
+[index, tf] = listdlg('PromptString', 'right foot force plates', 'SelectionMode', 'multiple', 'ListString', ForceList);
+
+counter = 1;
+
+if(tf == 0)
+    disp('no grf used for left foot');
+
+else
+    for i = 1 : size(index, 2)
+        
+        if size(index, 2) == 1
+            ind = index;
+        else
+            ind = index(i);
+        end
+        
+        % grforces.ExternalLoads.objects.ExternalForce(1) = [];
+        ind = str2num(ForceList{ind});
+        
+        grforces_generated.ExternalLoads.objects.ExternalForce(counter) = grforces.ExternalLoads.objects.ExternalForce(ind);
+        counter = counter + 1;
+    end
 end
+
+ForceList = {'1', '2', '3'};
+[index, tf] = listdlg('PromptString', 'left foot force plates', 'SelectionMode', 'multiple', 'ListString', ForceList);
+
+if(tf == 0)
+    disp('no grf used for left foot');
+
+else
+    for i = 1 : size(index, 2)
+        
+        if size(index, 2) == 1
+            ind = index;
+        else
+            ind = index(i);
+        end
+        
+        ind = str2num(ForceList{ind}) + 3;
+        
+        grforces_generated.ExternalLoads.objects.ExternalForce(counter) = grforces.ExternalLoads.objects.ExternalForce(ind);
+        counter = counter + 1;
+    end
+end
+Pref = struct;
+Pref.StructItem = false;
+
+grforces_generated.ExternalLoads.datafile = grfFileName;
+xml_write(fullfile(output_folder, 'GRF.xml'), grforces_generated, 'OpenSimDocument', Pref);

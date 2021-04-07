@@ -9,8 +9,8 @@ Preparations:
 
 Run Script:
     At 'Invert walking direction?' the answer is most-likely "No".
-    Select the correct and valid foot strikes (foot must be on the force plate)
-    Select the correct force plates for each foot. This sets the proper GRF.xml
+    Select the foot strike which is at the start of a correct and valid gait cycle (foot must be on the force plate)
+    Select the correct force plates for each foot. This sets the proper GRFs in the GRF.xml
 
 OUTPUT:
     Creates a folder with the same name as the *.c3d - file containing
