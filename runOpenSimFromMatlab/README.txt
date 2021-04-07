@@ -6,7 +6,7 @@ Requirements:
         gait2392.osim
         gait2392_actuartors.xml
 
-    C3D files must have been processed with a_process_C3D
+    C3D files must have been processed with "process_C3D"
     There must be a folder with the same name as the *.c3d - file containing
         - settings.mat
         - c3dfile.c3d
