@@ -34,7 +34,16 @@ nForces = c3d.getNumForces();
 if (nForces ~= 0)
     grfFileName = fullfile(output_folder, 'grf.mot');
     c3d.writeMOT(grfFileName);
-
+        
+    %replace nan and -nan(ind)
+    fid  = fopen(grfFileName,'r');
+    f=fread(fid,'*char')';
+    fclose(fid);
+    f = strrep(f,'-nan(ind)','0');
+    f = strrep(f,'nan','0');
+    fid  = fopen(grfFileName,'w');
+    fprintf(fid,'%s',f);
+    fclose(fid);
 end
 
 c3devents = btkGetEvents(acq);
