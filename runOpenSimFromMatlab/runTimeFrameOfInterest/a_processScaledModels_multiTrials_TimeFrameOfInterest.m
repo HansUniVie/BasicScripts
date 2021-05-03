@@ -50,8 +50,8 @@ for trialIndex = 1 : size(trialsFileNames, 2)
     trcFile = fullfile(folder, 'marker_experimental.trc');
     grfSetupFile = fullfile(folder, 'GRF.xml');
     load(fullfile(folder, 'settings.mat'));
-    startTime = double(min(cycle.left.start, cycle.right.start)) / 100;
-    endTime = double(max(cycle.left.footOff, cycle.right.footOff)) / 100;
+    startTime = double(min(cycle.left.start, cycle.right.start)) / frequency;
+    endTime = double(max(cycle.left.end, cycle.right.end)) / frequency;
             
     for modelIndex = 1 : size(scaledModelsFileNames, 2)
         try
