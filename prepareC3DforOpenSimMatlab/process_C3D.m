@@ -17,9 +17,9 @@ c3d.rotateData('x', -90)
 
 b_invert_x = questdlg('Invert walking direction?','Invert walking direction?', 'Yes', 'No', 'No');
 if strcmp(b_invert_x, 'Yes')
-    c3d.rotateData('y', 90)
-else
-    c3d.rotateData('y', -90)
+    c3d.rotateData('y', 180)
+% else
+%     c3d.rotateData('y', 180)
 end
 
 c3d.convertMillimeters2Meters();
@@ -54,8 +54,8 @@ cycle = struct;
 cycle.left = struct;
 cycle.right = struct;
 
-rightFootStrikeList = sprintfc('%d', c3devents.Right_Foot_Strike);
-[index, tf] = listdlg('PromptString', 'Choose the time of the right foot strike', 'SelectionMode', 'single', 'ListString', rightFootStrikeList);
+rightFootStrikeList = sprintfc('%.0f', c3devents.Right_Foot_Strike * frequency);
+[index, tf] = listdlg('PromptString', 'Choose the frame of the right foot strike', 'SelectionMode', 'single', 'ListString', rightFootStrikeList);
 
 if (tf == 0)
     disp('No Cycle for right foot selected');
@@ -79,8 +79,8 @@ else
     end
 end
 
-leftFootStrikeList = sprintfc('%d', c3devents.Left_Foot_Strike);
-[index, tf] = listdlg('PromptString', 'Choose the time of the left foot strike', 'SelectionMode', 'single', 'ListString', leftFootStrikeList);
+leftFootStrikeList = sprintfc('%.0f', c3devents.Left_Foot_Strike * frequency);
+[index, tf] = listdlg('PromptString', 'Choose the frame of the left foot strike', 'SelectionMode', 'single', 'ListString', leftFootStrikeList);
 
 if (tf == 0)
     disp('No Cycle for left foot selected');
