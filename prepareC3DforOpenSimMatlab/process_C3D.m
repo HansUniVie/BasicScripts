@@ -163,4 +163,4 @@ Pref = struct;
 Pref.StructItem = false;
 
 grforces_generated.ExternalLoads.datafile = grfFileName;
-xml_write(fullfile(output_folder, 'GRF.xml'), grforces_generated, 'OpenSimDocument', Pref);
+xml_write('GRF.xml', grforces_generated, 'OpenSimDocument', Pref);
